@@ -32,7 +32,7 @@ public class PersistenceAuthAutoConfiguration {
     @Bean(name = "authEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean authEntityManagerFactory(EntityManagerFactoryBuilder builder,
             @Qualifier("authDataSource") DataSource dataSource) {
-        return builder.dataSource(dataSource).packages("com.api.api_request.entity.auth")
+        return builder.dataSource(dataSource).packages("com.api.drinktakeaway_core_back.entity.auth")
                 .persistenceUnit("autenticazione").build();
     }
 

@@ -35,7 +35,7 @@ public class PersistenceDTAAutoConfiguration {
     @Bean(name = "DTAEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean barEntityManagerFactory(EntityManagerFactoryBuilder builder,
             @Qualifier("DTADataSource") DataSource dataSource) {
-        return builder.dataSource(dataSource).packages("com.api.api_request.entity.DTA")
+        return builder.dataSource(dataSource).packages("com.api.drinktakeaway_core_back.entity.DTA")
                 .persistenceUnit("drink_take_away").build();
     }
 

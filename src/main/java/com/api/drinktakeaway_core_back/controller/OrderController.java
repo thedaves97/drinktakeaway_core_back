@@ -1,5 +1,6 @@
 package com.api.drinktakeaway_core_back.controller;
 
+import com.api.drinktakeaway_core_back.dto.OrderDrinkQuantity;
 import com.api.drinktakeaway_core_back.entity.DTA.Menu;
 import com.api.drinktakeaway_core_back.entity.DTA.Order;
 import com.api.drinktakeaway_core_back.repository.DTA.MenuRepository;
@@ -75,5 +76,11 @@ public class OrderController {
     @GetMapping(value = "/getDrinkQuantityToDo/{idLocale}")
     public int getOrderDrinkQuantity(@PathVariable(value = "idLocale") int idLocale) {
         return orderRepository.getOrderDrinkQuantity(idLocale);
+    }
+
+    @GetMapping(value = "/getDrinkQuantityToDo")
+    public List<OrderDrinkQuantity> getOrderDrinkQuantity()
+    {
+        return orderRepository.getOrderDrinkQuantity();
     }
 }

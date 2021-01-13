@@ -20,7 +20,7 @@ public class LocaleController {
         return localeRepository.findAll();
     }
 
-    @GetMapping(value = "/getId")
+    @GetMapping(value = "/locale/getId")
     @ResponseBody
     public int getIdByNameLocale(@RequestParam String nameLocale) {
         return localeRepository.findIdByNomeLocale(nameLocale);

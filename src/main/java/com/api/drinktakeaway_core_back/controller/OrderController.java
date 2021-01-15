@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin
@@ -35,6 +37,18 @@ public class OrderController {
         return orderRepository.findOrderByEmail(email);
     }
 
+    @GetMapping(value = "/localOrders")
+    @ResponseBody
+    public List<Order> getOrdersBynameLocale(@RequestParam String nameLocale) {
+        return orderRepository.findOrdersByNameLocale(nameLocale);
+    }
+
+    @GetMapping(value = "/getDrinkByOrderNumber")
+    @ResponseBody
+    public List<Order> getDrinksByOrderNumber(@RequestParam int orderNumber) {
+        return orderRepository.findDrinksByNumberOrder(orderNumber);
+    }
+
     @PostMapping(value = "/saveOrder", consumes = "application/json", produces = "application/json")
     public HashMap<String, String> addOrder(@RequestBody JsonNode payload) {
         String localID = payload.get("localID").textValue();
@@ -52,7 +66,8 @@ public class OrderController {
 
             if (drinkID != null && drinkPrice != null && drinkNumerosity != null) {
 
-                Order order = new Order(userEmail, lastOrderNumber + 1, drinkNumerosity.asInt(), new Date());
+                Order order = new Order(userEmail, lastOrderNumber + 1, drinkNumerosity.asInt(), new Date(),
+                        "processed");
                 Menu menu = menuRepository.findMenuByIDs(Integer.parseInt(localID),
                         Integer.parseInt(drinkID.textValue()));
 
@@ -79,8 +94,15 @@ public class OrderController {
     }
 
     @GetMapping(value = "/getDrinkQuantityToDo")
-    public List<OrderDrinkQuantity> getOrderDrinkQuantity()
-    {
+    public List<OrderDrinkQuantity> getOrderDrinkQuantity() {
         return orderRepository.getOrderDrinkQuantity();
+    }
+
+    @GetMapping(value = "/bartender/updateStatusOrder")
+    @ResponseBody
+    @Transactional
+    public boolean updateStatusOrder(@RequestParam String status, @RequestParam int orderNumber) {
+        orderRepository.updateOrderStatus(status, orderNumber);
+        return true;
     }
 }

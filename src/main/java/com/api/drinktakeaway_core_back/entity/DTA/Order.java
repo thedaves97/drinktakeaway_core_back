@@ -32,6 +32,9 @@ public class Order {
     @Column(name = "id_bevanda")
     private int id_bevanda;
 
+    @Column(name = "status")
+    private String status;
+
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({ @JoinColumn(name = "id_bevanda", insertable = false, updatable = false),
@@ -41,11 +44,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(String email, int number, int numerosity, Date timestamp) {
+    public Order(String email, int number, int numerosity, Date timestamp, String status) {
         this.email = email;
         this.number = number;
         this.numerosity = numerosity;
         this.timestamp = timestamp;
+        this.status = status;
     }
 
     public void setId(int id) {
@@ -110,6 +114,14 @@ public class Order {
 
     public int getId_locale() {
         return id_locale;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

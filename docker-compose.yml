@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  mariadb-auth:
+    image: mariadb:latest
+    container_name: mariadb-auth
+    environment:
+      - MYSQL_ROOT_PASSWORD=""
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=autenticazione
+      - MYSQL_USER=peppino
+      - MYSQL_PASSWORD=prova
+    ports:
+      - 3307:3306
+
+  mariadb-core:
+    image: mariadb:latest
+    container_name: mariadb-core
+    environment:
+      - MYSQL_ROOT_PASSWORD=""
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=drink_take_away
+      - MYSQL_USER=peppino
+      - MYSQL_PASSWORD=prova
+    ports:
+      - 3306:3306
+
+  core:
+    image: taasnamespace/drink_take_away_core:1
+    container_name: drink_take_away_core
+    depends_on:
+      - mariadb-core
+      - mariadb-auth
+    links:
+      - "mariadb-auth:mariadb-auth"
+      - "mariadb-core:mariadb-core"
+    ports:
+      - 1111:1111
+
+  auth:
+    image: taasnamespace/drink_take_away_auth:1
+    container_name: drink_take_away_auth
+    depends_on:
+      - mariadb-auth
+    links:
+      - "mariadb-auth:mariadb-auth"
+    ports:
+      - 7777:7777

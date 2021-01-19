@@ -23,7 +23,7 @@ public class Ruolo {
     // @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "id_ruolo_fk"), inverseJoinColumns = @JoinColumn(name = "id_utente_fk"))
-    private Set<Ruolo> ruoli = new HashSet<>();
+    private Set<Utente> utenti = new HashSet<>();
 
     public void setId(int id) {
         this.id = id;
@@ -33,12 +33,12 @@ public class Ruolo {
         return id;
     }
 
-    public void setRuoli(Set<Ruolo> ruoli) {
-        this.ruoli = ruoli;
+    public Set<Utente> getUtenti() {
+        return utenti;
     }
 
-    public Set<Ruolo> getRuoli() {
-        return ruoli;
+    public void setUtenti(Set<Utente> utenti) {
+        this.utenti = utenti;
     }
 
     public void setRuoloEnum(RuoloEnum ruoloEnum) {

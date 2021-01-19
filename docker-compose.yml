@@ -37,8 +37,16 @@ services:
     ports:
       - 8083:8083
 
+  auth:
+    image: taasnamespace/drink_take_away_auth:2
+    container_name: drinktakeaway_auth
+    depends_on:
+      - mariadb-auth
+      - discovery
+    ports:
+      - 7777:7777
   core:
-    image: taasnamespace/drink_take_away_core:1
+    image: taasnamespace/drink_take_away_core:2
     container_name: drinktakeaway_core
     depends_on:
       - mariadb-core
@@ -55,15 +63,6 @@ services:
       - discovery
     ports:
       - 1113:1113
-  
-  auth:
-    image: taasnamespace/drink_take_away_auth:1
-    container_name: drinktakeaway_auth
-    depends_on:
-      - mariadb-auth
-      - discovery
-    ports:
-      - 7777:7777
 
   localhistory:
     image: taasnamespace/drink_take_away_localhistory:1

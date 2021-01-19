@@ -1,48 +1,76 @@
 version: "3"
 
 services:
-  mariadb-auth:
-    image: mariadb:latest
-    container_name: mariadb-auth
-    environment:
-      - MYSQL_ROOT_PASSWORD=""
-      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
-      - MYSQL_DATABASE=autenticazione
-      - MYSQL_USER=peppino
-      - MYSQL_PASSWORD=prova
-    ports:
-      - 3307:3306
-
   mariadb-core:
     image: mariadb:latest
     container_name: mariadb-core
     environment:
-      - MYSQL_ROOT_PASSWORD=""
       - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
-      - MYSQL_DATABASE=drink_take_away
-      - MYSQL_USER=peppino
-      - MYSQL_PASSWORD=prova
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_TCP_PORT= 3308
+    ports:
+      - 3308:3308
+
+  mariadb-auth:
+    image: mariadb:latest
+    container_name: mariadb-auth
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_TCP_PORT= 3307
+    ports:
+      - 3307:3307
+
+  mariadb-localhistory:
+    image: mariadb:latest
+    container_name: mariadb-localhistory
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+      - MYSQL_DATABASE=local_order_history
+      - MYSQL_ROOT_PASSWORD=pass
     ports:
       - 3306:3306
 
+  discovery:
+    image: taasnamespace/eurekadiscovery:latest
+    container_name: eureka-discovery
+    ports:
+      - 8083:8083
+
   core:
     image: taasnamespace/drink_take_away_core:1
-    container_name: drink_take_away_core
+    container_name: drinktakeaway_core
     depends_on:
       - mariadb-core
       - mariadb-auth
-    links:
-      - "mariadb-auth:mariadb-auth"
-      - "mariadb-core:mariadb-core"
+      - discovery
     ports:
       - 1111:1111
 
+  local:
+    image: taasnamespace/drink_take_away_local:1
+    container_name: drinktakeaway_local
+    depends_on:
+      - mariadb-core
+      - discovery
+    ports:
+      - 1113:1113
+  
   auth:
     image: taasnamespace/drink_take_away_auth:1
-    container_name: drink_take_away_auth
+    container_name: drinktakeaway_auth
     depends_on:
       - mariadb-auth
-    links:
-      - "mariadb-auth:mariadb-auth"
+      - discovery
     ports:
       - 7777:7777
+
+  localhistory:
+    image: taasnamespace/drink_take_away_localhistory:1
+    container_name: drinktakeaway_localhistory
+    depends_on:
+      - mariadb-localhistory
+      - discovery
+    ports:
+      - 1112:1112
+

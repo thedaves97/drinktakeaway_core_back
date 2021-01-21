@@ -1,2 +1,3 @@
-INSERT INTO bevanda (name, type)
-VALUES ("negroni", "cocktail");
+UPDATE order_all
+set status = 'processed'
+where id_locale = 1

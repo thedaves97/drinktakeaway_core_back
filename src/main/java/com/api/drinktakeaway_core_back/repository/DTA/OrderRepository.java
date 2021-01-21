@@ -25,7 +25,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("Select new com.api.drinktakeaway_core_back.dto.OrderDrinkQuantity(Sum(o.numerosity), o.id_locale) from Order o group by o.id_locale")
     List<OrderDrinkQuantity> getOrderDrinkQuantity();
 
-    @Query("Select o from Order o where o.menu.locale.name = :nameLocale order by o.number desc")
+    @Query("Select o from Order o where o.menu.locale.name = :nameLocale AND o.status != 'completed' order by o.number desc")
     List<Order> findOrdersByNameLocale(@Param("nameLocale") String nameLocale);
 
     @Modifying

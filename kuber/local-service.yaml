@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: local
+  name: local
+spec:
+  ports:
+  - name: "1113"
+    port: 1113
+    targetPort: 1113
+  selector:
+    io.kompose.service: local
+status:
+  loadBalancer: {}

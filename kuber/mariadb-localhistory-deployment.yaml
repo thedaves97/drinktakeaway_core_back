@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mariadb-localhistory
+  name: mariadb-localhistory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mariadb-localhistory
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mariadb-localhistory
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: '"yes"'
+        - name: MYSQL_DATABASE
+          value: local_order_history   
+        - name: MYSQL_ROOT_PASSWORD
+          value: pass
+        - name: MYSQL_DATABASE_URL
+          value: jdbc:mariadb://mariadb-localhistory/local_order_history
+        image: mariadb:latest
+        imagePullPolicy: ""
+        name: mariadb-localhistory
+        ports:
+        - containerPort: 3306
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
+
+
+---
+
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+ # name: mariadb-config
+#data:
+ # MYSQL_HOST: $(minikube ip)
+  #MYSQL_DATABASE: local_order_history
+  #MYSQL_DATABASE_URL: jdbc:mariadb://mariadb-localhistory/local_order_history

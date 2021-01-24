@@ -5,15 +5,17 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
-  labels:
-    io.kompose.service: localhistory
-  name: localhistory
+  name: localhistory-service
 spec:
+  type: LoadBalancer  
   ports:
   - name: "1112"
+    protocol: TCP
     port: 1112
     targetPort: 1112
+    nodePort: 30004
   selector:
     io.kompose.service: localhistory
+  
 status:
   loadBalancer: {}

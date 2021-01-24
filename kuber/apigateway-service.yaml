@@ -6,16 +6,16 @@ metadata:
     kompose.version: 1.21.0 (992df58d8)
   creationTimestamp: null
   labels:
-    io.kompose.service: core
-  name: core
+    io.kompose.service: apigateway
+  name: apigateway-service
 spec:
-  type: LoadBalancer
+  type: NodePort  
   ports:
-  - name: "1111"
-    port: 1111
-    targetPort: 1111
-    nodePort: 30002
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+    nodePort: 30001
   selector:
-    io.kompose.service: core
+    io.kompose.service: apigateway
 status:
   loadBalancer: {}

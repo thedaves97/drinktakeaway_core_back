@@ -31,8 +31,6 @@ spec:
           value: local_order_history   
         - name: MYSQL_ROOT_PASSWORD
           value: pass
-        - name: MYSQL_DATABASE_URL
-          value: jdbc:mariadb://mariadb-localhistory/local_order_history
         image: mariadb:latest
         imagePullPolicy: ""
         name: mariadb-localhistory

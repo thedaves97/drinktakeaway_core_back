@@ -24,7 +24,7 @@ spec:
         io.kompose.service: discovery
     spec:
       containers:
-      - image: taasnamespace/eurekadiscovery:latest
+      - image: taasnamespace/eurekadiscovery:2
         imagePullPolicy: ""
         name: eureka-discovery
         ports:

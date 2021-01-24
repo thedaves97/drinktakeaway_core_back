@@ -9,10 +9,12 @@ metadata:
     io.kompose.service: auth
   name: auth
 spec:
+  type: LoadBalancer
   ports:
   - name: "7777"
     port: 7777
     targetPort: 7777
+    nodePort: 30001
   selector:
     io.kompose.service: auth
 status:

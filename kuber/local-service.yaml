@@ -9,10 +9,13 @@ metadata:
     io.kompose.service: local
   name: local
 spec:
+  type: LoadBalancer
   ports:
   - name: "1113"
     port: 1113
     targetPort: 1113
+    nodePort: 30003
+
   selector:
     io.kompose.service: local
 status:

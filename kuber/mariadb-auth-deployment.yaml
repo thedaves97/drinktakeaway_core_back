@@ -29,13 +29,13 @@ spec:
           value: '"yes"'
         - name: MYSQL_ROOT_PASSWORD
           value: pass
-        - name: MYSQL_TCP_PORT
-          value: ' 3307'
+        - name: MYSQL_DATABASE
+          value: autenticazione  
         image: mariadb:latest
         imagePullPolicy: ""
         name: mariadb-auth
         ports:
-        - containerPort: 3307
+        - containerPort: 3306
         resources: {}
       restartPolicy: Always
       serviceAccountName: ""

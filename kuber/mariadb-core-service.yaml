@@ -9,13 +9,13 @@ metadata:
     io.kompose.service: mariadb-core
   name: mariadb-core
 spec:
-  type: ExternalName
-  # https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds
-  externalName: host.docker.internal
+  type: NodePort
   ports:
   - name: "3308"
-    port: 3308
-    targetPort: 3308
+    port: 3306
+    targetPort: 3306
+    nodePort: 30008
+    protocol: TCP
   selector:
     io.kompose.service: mariadb-core
 status:

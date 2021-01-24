@@ -9,13 +9,13 @@ metadata:
     io.kompose.service: mariadb-auth
   name: mariadb-auth
 spec:
-  type: ExternalName
-  # https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds
-  externalName: host.docker.internal
+  type: NodePort
   ports:
   - name: "3307"
-    port: 3307
-    targetPort: 3307
+    port: 3306
+    targetPort: 3306
+    nodePort: 30007
+    protocol: TCP
   selector:
     io.kompose.service: mariadb-auth
 status:

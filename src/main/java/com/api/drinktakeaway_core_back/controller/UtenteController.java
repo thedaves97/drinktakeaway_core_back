@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/core")
 public class UtenteController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class UtenteController {
 
     @GetMapping("/utente/ins/{id}/{user}/{pass}")
     public ResponseEntity<Utente> updateUtente(@PathVariable(value = "id") Integer UtenteId,
-            @PathVariable(value = "user") String UtenteUser, @PathVariable(value = "pass") String UtentePass) {
+                                               @PathVariable(value = "user") String UtenteUser, @PathVariable(value = "pass") String UtentePass) {
         // Optional<Utente> Utente = utenteRepository.findById(UtenteId);
 
         Utente u = new Utente(UtenteUser, UtentePass);

@@ -31,6 +31,7 @@ services:
     ports:
       - 3306:3306
 
+
   discovery:
     image: taasnamespace/eurekadiscovery:latest
     container_name: eureka-discovery
@@ -46,7 +47,7 @@ services:
     ports:
       - 7777:7777
   core:
-    image: taasnamespace/drink_take_away_core:4
+    image: taasnamespace/drink_take_away_core:8
     container_name: drinktakeaway_core
     depends_on:
       - mariadb-core
@@ -65,11 +66,10 @@ services:
       - 1113:1113
 
   localhistory:
-    image: taasnamespace/drink_take_away_localhistory:3
+    image: taasnamespace/drink_take_away_localhistory:12
     container_name: drinktakeaway_localhistory
     depends_on:
       - mariadb-localhistory
       - discovery
     ports:
       - 1112:1112
-

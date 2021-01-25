@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/core")
 @CrossOrigin
 public class MenuController {
 
     @Autowired
     private MenuRepository menuRepository;
 
-    @GetMapping("/getAllMenu")
+    @GetMapping("/get_all_menu")
     public List<Menu> getAllMenus() {
         return menuRepository.findAll();
     }

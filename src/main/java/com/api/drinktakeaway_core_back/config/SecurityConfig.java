@@ -80,8 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/api/v1/getAllLocals", "/api/v1/getDrinkQuantityToDo/**", "/api/v1/getDrinkQuantityToDo",
-                        "/api/v1/getDrinkByOrderNumber")
+                .antMatchers("/api/v1/core/get_all_locals", "/api/v1/core/get_drink_quantity_to_do/**", "/api/v1/core/get_drink_quantity_to_do",
+                        "/api/v1/core/get_drink_by_order_number")
                 .permitAll().anyRequest().authenticated().and().exceptionHandling()
                 .authenticationEntryPoint(jwtEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

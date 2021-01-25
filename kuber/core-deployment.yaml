@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: core
+  name: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: core
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: core
+    spec:
+      containers:
+      - image: taasnamespace/drink_take_away_core:5
+        imagePullPolicy: ""
+        name: drinktakeaway-core
+        ports:
+        - containerPort: 1111
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

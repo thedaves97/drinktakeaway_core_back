@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: apigateway
+  name: apigateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: apigateway
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: apigateway
+    spec:
+      containers:
+      - image: taasnamespace/api_gateway:7
+        imagePullPolicy: ""
+        name: drinktakeaway-api-gateway
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

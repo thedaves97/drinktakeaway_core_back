@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mariadb-core
+  name: mariadb-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mariadb-core
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mariadb-core
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: '"yes"'
+        - name: MYSQL_ROOT_PASSWORD
+          value: pass
+        - name: MYSQL_DATABASE
+          value: drink_take_away
+        image: mariadb:latest
+        imagePullPolicy: ""
+        name: mariadb-core
+        ports:
+        - containerPort: 3306
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

@@ -24,7 +24,7 @@ spec:
         io.kompose.service: core
     spec:
       containers:
-      - image: taasnamespace/drink_take_away_core:5
+      - image: taasnamespace/drink_take_away_core:9
         imagePullPolicy: ""
         name: drinktakeaway-core
         ports:

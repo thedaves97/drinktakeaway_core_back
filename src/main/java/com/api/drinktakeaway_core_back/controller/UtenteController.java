@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/core")
 public class UtenteController {
 
     @Autowired

@@ -16,7 +16,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/core")
 @CrossOrigin
 public class OrderController {
 
@@ -26,7 +26,7 @@ public class OrderController {
     @Autowired
     private MenuRepository menuRepository;
 
-    @GetMapping("/getAllOrders")
+    @GetMapping("/get_all_orders")
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
@@ -37,19 +37,19 @@ public class OrderController {
         return orderRepository.findOrderByEmail(email);
     }
 
-    @GetMapping(value = "/localOrders")
+    @GetMapping(value = "/local_orders")
     @ResponseBody
     public List<Order> getOrdersBynameLocale(@RequestParam String nameLocale) {
         return orderRepository.findOrdersByNameLocale(nameLocale);
     }
 
-    @GetMapping(value = "/getDrinkByOrderNumber")
+    @GetMapping(value = "/get_drink_by_order_number")
     @ResponseBody
     public List<Order> getDrinksByOrderNumber(@RequestParam int orderNumber) {
         return orderRepository.findDrinksByNumberOrder(orderNumber);
     }
 
-    @PostMapping(value = "/saveOrder", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/save_order", consumes = "application/json", produces = "application/json")
     public HashMap<String, String> addOrder(@RequestBody JsonNode payload) {
         String localID = payload.get("localID").textValue();
         String userEmail = payload.get("userEmail").textValue();
@@ -88,17 +88,17 @@ public class OrderController {
         return response;
     }
 
-    @GetMapping(value = "/getDrinkQuantityToDo/{idLocale}")
+    @GetMapping(value = "/get_drink_quantity_to_do/{idLocale}")
     public int getOrderDrinkQuantity(@PathVariable(value = "idLocale") int idLocale) {
         return orderRepository.getOrderDrinkQuantity(idLocale);
     }
 
-    @GetMapping(value = "/getDrinkQuantityToDo")
+    @GetMapping(value = "/get_drink_quantity_to_do")
     public List<OrderDrinkQuantity> getOrderDrinkQuantity() {
         return orderRepository.getOrderDrinkQuantity();
     }
 
-    @GetMapping(value = "/bartender/updateStatusOrder")
+    @GetMapping(value = "/bartender/update_status_order")
     @ResponseBody
     @Transactional
     public boolean updateStatusOrder(@RequestParam String status, @RequestParam int orderNumber) {

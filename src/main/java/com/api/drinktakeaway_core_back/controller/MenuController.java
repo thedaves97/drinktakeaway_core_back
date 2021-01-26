@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/core")
 @CrossOrigin
 public class MenuController {
 
     @Autowired
     private MenuRepository menuRepository;
 
-    @GetMapping("/getAllMenu")
+    @GetMapping("/get_all_menu")
     public List<Menu> getAllMenus() {
         return menuRepository.findAll();
     }
@@ -41,7 +41,7 @@ public class MenuController {
         return menuRepository.findMenuByNomeLocale(nameLocale);
     }
 
-    @GetMapping(value = "/specificdrinktype")
+    @GetMapping(value = "/specific_drink_type")
     @ResponseBody
     public List<Menu> getBevandaByNameLocaleTypeBevanda(@RequestParam String nameLocale,
             @RequestParam String typeBevanda) {

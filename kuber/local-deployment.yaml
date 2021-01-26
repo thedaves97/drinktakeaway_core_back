@@ -24,7 +24,7 @@ spec:
         io.kompose.service: local
     spec:
       containers:
-      - image: taasnamespace/drink_take_away_local:2
+      - image: taasnamespace/drink_take_away_local:4
         imagePullPolicy: ""
         name: drinktakeaway-local
         ports:

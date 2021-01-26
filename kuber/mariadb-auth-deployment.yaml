@@ -36,8 +36,13 @@ spec:
         name: mariadb-auth
         ports:
         - containerPort: 3306
-        resources: {}
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql/auth
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-auth-pv-claim
       restartPolicy: Always
       serviceAccountName: ""
-      volumes: null
 status: {}

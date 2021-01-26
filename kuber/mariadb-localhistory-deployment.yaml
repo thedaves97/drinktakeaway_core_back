@@ -36,10 +36,15 @@ spec:
         name: mariadb-localhistory
         ports:
         - containerPort: 3306
-        resources: {}
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql/localhistory
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-lh-pv-claim
       restartPolicy: Always
       serviceAccountName: ""
-      volumes: null
 status: {}
 
 

@@ -36,8 +36,13 @@ spec:
         name: mariadb-core
         ports:
         - containerPort: 3306
-        resources: {}
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql/core
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mariadb-core-pv-claim
       restartPolicy: Always
       serviceAccountName: ""
-      volumes: null
 status: {}

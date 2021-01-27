@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: apigateway
   name: apigateway
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       io.kompose.service: apigateway
@@ -24,7 +24,7 @@ spec:
         io.kompose.service: apigateway
     spec:
       containers:
-      - image: taasnamespace/api_gateway:7
+      - image: taasnamespace/api_gateway:9
         imagePullPolicy: ""
         name: drinktakeaway-api-gateway
         ports:

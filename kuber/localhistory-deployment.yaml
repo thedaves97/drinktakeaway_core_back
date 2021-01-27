@@ -24,7 +24,7 @@ spec:
         io.kompose.service: localhistory
     spec:
       containers:
-      - image: taasnamespace/drink_take_away_localhistory:13
+      - image: taasnamespace/drink_take_away_localhistory:14
         imagePullPolicy: ""
         name: drinktakeaway-localhistory
         ports:
